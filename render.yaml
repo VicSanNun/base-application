@@ -1,12 +1,12 @@
-services:
+databases:
   # Banco de dados PostgreSQL
-  - type: database
-    name: postgres_db
+  - name: postgres_db
     plan: free
     databaseName: app_db
     user: user
     ipAllowList: []  # Permite conexões de qualquer IP
 
+services:
   # Backend FastAPI
   - type: web
     name: fastapi_backend
