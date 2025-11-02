@@ -1,0 +1,43 @@
+services:
+  # Banco de dados PostgreSQL
+  - type: pgsql
+    name: postgres_db
+    plan: free
+    ipAllowList: []
+    databases:
+      - name: app_db
+        databaseName: app_db
+        user: user
+
+  # Backend FastAPI
+  - type: web
+    name: fastapi_backend
+    env: docker
+    plan: free
+    docker:
+      dockerfile: ./backend/Dockerfile
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: postgres_db
+          property: connectionString
+    # Se preferir não usar Docker, descomente a alternativa abaixo:
+    # env: python
+    # buildCommand: pip install -r requirements.txt
+    # startCommand: python -m uvicorn main:app --host 0.0.0.0 --port $PORT
+
+  # Frontend React
+  - type: web
+    name: react_frontend
+    env: docker
+    plan: free
+    docker:
+      dockerfile: ./frontend/Dockerfile
+    routes:
+      - type: rewrite
+        source: /*
+        destination: /index.html
+    # Alternativa sem Docker para React:
+    # type: static
+    # buildCommand: npm run build
+    # staticPublishPath: ./build
