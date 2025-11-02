@@ -6,18 +6,20 @@ from sqlalchemy import text
 
 app = FastAPI(title="FastAPI Clean Architecture Example")
 
-origins = [
-    "http://localhost:5173",  # frontend local (Vite)
-    "http://localhost:3000",  # frontend docker 
-]
+# origins = [
+#     "http://localhost:5173",  # frontend local (Vite)
+#     "http://localhost:3000",  # frontend docker 
+# ]
 
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=origins,
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
-)
+origins = ["*"]
+
+# app.add_middleware(
+#     CORSMiddleware,
+#     allow_origins=origins,
+#     allow_credentials=True,
+#     allow_methods=["*"],
+#     allow_headers=["*"],
+# )
 
 app.include_router(hello_router)
 
