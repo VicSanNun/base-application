@@ -1,7 +1,7 @@
 from fastapi import FastAPI, Depends
-from app.interfaces.api.routers.hello_router import router as hello_router
+from src.presentation.api.routers.hello_router import router as hello_router
 from fastapi.middleware.cors import CORSMiddleware
-from app.db import get_db
+from src.infrastructure.database.db import get_db
 from sqlalchemy import text
 
 app = FastAPI(title="FastAPI Clean Architecture Example")

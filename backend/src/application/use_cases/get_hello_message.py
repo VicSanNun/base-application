@@ -1,4 +1,4 @@
-from app.domain.entities.message import Message
+from src.domain.entities.message import Message
 
 class GetHelloMessageUseCase:
     def __init__(self, message_repository):
